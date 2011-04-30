@@ -27,7 +27,6 @@ public class Posicion implements Cloneable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + turno;
 		result = prime * result + x;
 		result = prime * result + y;
 		return result;
@@ -45,9 +44,6 @@ public class Posicion implements Cloneable{
 			return false;
 		}
 		Posicion other = (Posicion) obj;
-		if (turno != other.turno) {
-			return false;
-		}
 		if (x != other.x) {
 			return false;
 		}

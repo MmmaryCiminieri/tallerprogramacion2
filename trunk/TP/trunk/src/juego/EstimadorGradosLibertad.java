@@ -26,7 +26,7 @@ public class EstimadorGradosLibertad implements Estimador {
 	}
 
 	private boolean faltaGrupo(int gradosLibertad, int gradosLibertadOponente) {
-		return ((gradosLibertad == Integer.MAX_VALUE) && (gradosLibertadOponente == Integer.MAX_VALUE));
+		return ((gradosLibertad == Integer.MAX_VALUE) || (gradosLibertadOponente == Integer.MAX_VALUE));
 	}
 	
 	private int evaluacionSinGrupos(int gradosLibertad,
