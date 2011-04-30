@@ -27,6 +27,9 @@ public class Tablero implements Cloneable {
 			nuevoTablero.tablero[posicion.getX()][posicion.getY()] = posicion.getTurno();
 			nuevoTablero.administradorGrupos.agregarFicha(posicion, nuevoTablero.buscarLibertades(posicion));
 			nuevoTablero.turno = Constantes.oponente(this.turno);
+			if (capturaEnemigo(posicion)) {
+				nuevoTablero.estado = Constantes.setGanador(posicion.getTurno());
+			}
 			return nuevoTablero;
 		}
 		return null;
@@ -54,7 +57,7 @@ public class Tablero implements Cloneable {
 	}
 	
 	private boolean esLegal(Posicion posicion) {
-		if (!perteneceTablero(posicion)) {
+		if (!perteneceTablero(posicion.getX(), posicion.getY())) {
 			return false;
 		}
 		if (turnoInvalido(posicion.getTurno())) {
@@ -100,20 +103,17 @@ public class Tablero implements Cloneable {
 		if (obtenerEspaciosVecinos(jugada).size() > 0) {
 			return false;
 		}
-		List<Integer> libertadAmigos = administradorGrupos.gradosLibertadAmigosVecinos(jugada);
-		List<Integer> libertadEnemigos = administradorGrupos.gradosLibertadEnemigosVecinos(jugada);
-		if (grupoAmigoLibre(libertadAmigos)) {
+		if (capturaEnemigo(jugada)) {
 			return false;
 		}
-		if (capturaEnemigo(libertadEnemigos)) {
-			estado = jugada.getTurno();
+		if (grupoAmigoLibre(jugada)) {
 			return false;
 		}
-		
 		return true;
 	}
 	
-	private boolean capturaEnemigo(List<Integer> libertadEnemigos) {
+	private boolean capturaEnemigo(Posicion posicion) {
+		List<Integer> libertadEnemigos = administradorGrupos.gradosLibertadEnemigosVecinos(posicion);
 		for (Integer libertad : libertadEnemigos) {
 			if (libertad == 1) {
 				return true;
@@ -122,7 +122,8 @@ public class Tablero implements Cloneable {
 		return false;
 	}
 
-	private boolean grupoAmigoLibre(List<Integer> libertadAmigos) {
+	private boolean grupoAmigoLibre(Posicion posicion) {
+		List<Integer> libertadAmigos = administradorGrupos.gradosLibertadAmigosVecinos(posicion);
 		for (Integer libertad : libertadAmigos) {
 			if (libertad > 1) {
 				return true;
@@ -137,29 +138,24 @@ public class Tablero implements Cloneable {
 		
 		List<Posicion> vecinos = new ArrayList<Posicion>();
 		
-		Posicion vecino1 = new Posicion(x - 1, y, tablero[x - 1][y]);
-		if (perteneceTablero(vecino1)) {
-			vecinos.add(vecino1);
+		if (perteneceTablero(x - 1, y)) {
+			vecinos.add(new Posicion(x - 1, y, tablero[x - 1][y]));
 		}
-		Posicion vecino2 = new Posicion(x + 1, y, tablero[x + 1][y]);
-		if (perteneceTablero(vecino2)) {
-			vecinos.add(vecino2);
+		if (perteneceTablero(x + 1, y)) {
+			vecinos.add(new Posicion(x + 1, y, tablero[x + 1][y]));
 		}
-		Posicion vecino3 = new Posicion(x, y - 1, tablero[x][y - 1]);
-		if (perteneceTablero(vecino3)) {
-			vecinos.add(vecino3);
+		if (perteneceTablero(x, y - 1)) {
+			vecinos.add(new Posicion(x, y - 1, tablero[x][y - 1]));
 		}
-		Posicion vecino4 = new Posicion(x, y + 1, tablero[x][y + 1]);
-		if (perteneceTablero(vecino4)) {
-			vecinos.add(vecino4);
+		if (perteneceTablero(x, y + 1)) {
+			vecinos.add(new Posicion(x, y + 1, tablero[x][y + 1]));
 		}
 		
 		return vecinos;
 	}
 
-	private boolean perteneceTablero(Posicion posicion) {
-		if ((posicion.getX() < 0) || (posicion.getY() < 0) 
-				|| (posicion.getX() >= tablero.length) || (posicion.getY() >= tablero.length)) {
+	private boolean perteneceTablero(int x, int y) {
+		if ((x < 0) || (y < 0) || (x >= tablero.length) || (y >= tablero.length)) {
 			return false;
 		}
 		return true;
@@ -183,6 +179,12 @@ public class Tablero implements Cloneable {
 		Tablero copia = null;
 		try {
 			copia = (Tablero)super.clone();
+			copia.tablero = new int[this.tablero.length][this.tablero.length];
+			for (int i = 0 ; i < this.tablero.length ; i++) {
+				for (int j = 0 ; j < this.tablero.length ; j++) {
+					copia.tablero[i][j] = this.tablero[i][j];
+				}
+			}
 			copia.administradorGrupos = (AdministradorGrupos) this.administradorGrupos.clone();
 		} catch (CloneNotSupportedException e) {}
 		

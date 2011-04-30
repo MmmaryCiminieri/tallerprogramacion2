@@ -11,7 +11,7 @@ public class Constantes {
 	public final static int EN_PROGRESO = 4;
 	
 	public final static int VALOR_VICTORIA = Integer.MAX_VALUE;
-	public final static int VALOR_DERROTA = Integer.MIN_VALUE;
+	public final static int VALOR_DERROTA = -VALOR_VICTORIA;
 	public final static int VALOR_EMPATE = 0;
 	
 	public final static int PENALIZACION_ATARI = 100;
@@ -24,5 +24,15 @@ public class Constantes {
 			return BLANCO;
 		}
 		return VACIO;
+	}
+
+	public static int setGanador(int color) {
+		if (color == BLANCO) {
+			return GANA_BLANCO;
+		}
+		if (color == NEGRO) {
+			return GANA_NEGRO;
+		}
+		return EN_PROGRESO;
 	}
 }

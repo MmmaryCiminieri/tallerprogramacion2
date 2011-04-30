@@ -1,13 +1,13 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
 import juego.Constantes;
 import juego.EstimadorGradosLibertad;
 import juego.Estrategia;
 import juego.EstrategiaAlfaBeta;
 import juego.Posicion;
 import juego.Tablero;
+
 
 
 public class Main {
@@ -20,8 +20,8 @@ public class Main {
 		// TODO Auto-generated method stub
 		System.out.println("Hello GO!");
 
-		Tablero tablero = new Tablero(7);
-		Estrategia estrategia = new EstrategiaAlfaBeta(new EstimadorGradosLibertad(), 5, 5);
+		Tablero tablero = new Tablero(5);
+		Estrategia estrategia = new EstrategiaAlfaBeta(new EstimadorGradosLibertad(), 10, 10);
 		
 		while (true) {
 			Posicion jugada = estrategia.obtenerMejorJugada(tablero);
