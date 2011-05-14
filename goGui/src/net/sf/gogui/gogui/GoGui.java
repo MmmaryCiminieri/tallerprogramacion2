@@ -2066,8 +2066,8 @@ public class GoGui
             humanMoved(move);
             try {
             	if (getBoard().getKilled().size() > 0){
-            		//TODO (Todo para encontrarlo mar rapido) jugador humano
-            		System.out.println("FIN");	
+            		//TODO (Todo para encontrarlo mas rapido) jugador humano
+            		System.out.println("FIN, gano un jugador humano");	
             		m_game.haltClock();
             		showGameFinishedNew();
             		newGame(getBoardSize());
@@ -2950,6 +2950,7 @@ public class GoGui
 
     private void computerMoved()
     {
+    	boolean endedBecauseOfFirstDeath = false;
         if (! endLengthyCommand())
             return;
         if (m_beepAfterMove)
@@ -3006,13 +3007,9 @@ public class GoGui
                 m_game.play(move);
                 try {
                 	if (getBoard().getKilled().size() > 0){
-                		//TODO (para encontrar mas facil) jugador Computadora
-                		System.out.println("FIN");	
-                		showGameFinishedNew();
-                		newGame(getBoardSize());
-                         updateViews(true, true);
-                         checkComputerMove();
-                		return;
+                		//TODO (todo para encontrar mas facil) jugador Computadora
+                		System.out.println("FIN, gano una pc player");	
+                		endedBecauseOfFirstDeath = true;
                 	}
     			} catch (Exception e) {
     				// TODO: handle exception
@@ -3048,6 +3045,13 @@ public class GoGui
         {
             showError(e);
             clearStatus();
+        }
+        
+        if(endedBecauseOfFirstDeath){
+        	showGameFinishedNew();
+    		newGame(getBoardSize());
+            updateViews(true, true);
+            checkComputerMove();
         }
     }
 
