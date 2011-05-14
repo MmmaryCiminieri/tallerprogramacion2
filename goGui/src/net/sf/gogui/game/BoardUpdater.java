@@ -76,7 +76,6 @@ public class BoardUpdater
             else if (player != null)
                 board.setToMove(player);
             Move move = node.getMove();
-            System.out.println("Board Updater update2");
             if (move != null)
             {
                 board.play(move);

@@ -108,7 +108,6 @@ public final class Main
     private static void startGoGui(final GoGuiSettings settings)
         throws GtpError, ErrorMessage
     {
-    	System.out.println("Acaestoy ");
         assert ! settings.m_noStartup;
         // Create thread group to catch errors from Swing event thread
         ThreadGroup group = new ThreadGroup("catch-runtime-exceptions") {

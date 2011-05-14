@@ -158,7 +158,6 @@ public class GoGui
                  File analyzeCommandsFile)
         throws GtpError, ErrorMessage
     {
-    	System.out.println("program" + program);
         int boardSize = m_prefs.getInt("boardsize", GoPoint.DEFAULT_SIZE);
         m_beepAfterMove = m_prefs.getBoolean("beep-after-move", true);
         m_initialFile = file;
@@ -2067,8 +2066,13 @@ public class GoGui
             humanMoved(move);
             try {
             	if (getBoard().getKilled().size() > 0){
+            		//TODO (Todo para encontrarlo mar rapido) jugador humano
             		System.out.println("FIN");	
-            		showGameFinished();
+            		m_game.haltClock();
+            		showGameFinishedNew();
+            		newGame(getBoardSize());
+                     updateViews(true, true);
+                     //checkComputerMove();
             		return;
             	}
 			} catch (Exception e) {
@@ -2954,7 +2958,6 @@ public class GoGui
         try
         {
             String response = m_gtp.getResponse();
-            System.out.println("response " + response);
             checkLostOnTime(toMove);
             boolean gameTreeChanged = false;
             String name = getProgramName();
@@ -3001,7 +3004,19 @@ public class GoGui
                 }
                 Move move = Move.get(toMove, point);
                 m_game.play(move);
-                System.out.println("a ver ");
+                try {
+                	if (getBoard().getKilled().size() > 0){
+                		//TODO (para encontrar mas facil) jugador Computadora
+                		System.out.println("FIN");	
+                		showGameFinishedNew();
+                		newGame(getBoardSize());
+                         updateViews(true, true);
+                         checkComputerMove();
+                		return;
+                	}
+    			} catch (Exception e) {
+    				// TODO: handle exception
+    			}         
                 m_gtp.updateAfterGenmove(getBoard());
                 if (point == null && ! isComputerBoth())
                 {
@@ -3240,7 +3255,6 @@ public class GoGui
             && NodeUtil.isTimeLeftKnown(getCurrentNode(), toMove))
             GtpUtil.sendTimeLeft(m_gtp, getClock(), toMove);
         m_game.startClock();
-        System.out.println("command "+ command);
         runLengthyCommand(command, callback);
     }
 
@@ -3317,8 +3331,7 @@ public class GoGui
     }
 
     private void humanMoved(Move move)
-    {	System.out.println("gogui human moved");
-    	
+    {	
         GoPoint p = move.getPoint();
         if (p != null)
             paintImmediately(p, move.getColor(), true);
@@ -4217,7 +4230,16 @@ public class GoGui
                                   i18n("MSG_GAME_FINISHED"),
                                   i18n("MSG_GAME_FINISHED_2"), false);
     }
-
+//TODO agregado por mmmary falta corregir para pc player
+    private void showGameFinishedNew()
+    {
+       // if (m_resigned)
+         //   return;
+        String disableKey = "net.sf.gogui.gogui.GoGui.game-finished";
+        m_messageDialogs.showInfo(disableKey, this,
+                                  i18n("MSG_GAME_FINISHED_MMMARY"),
+                                  i18n("MSG_GAME_FINISHED_2_MMMARY"), false);
+    }
     private void showInfo(String mainMessage, String optionalMessage,
                           boolean isCritical)
     {
@@ -4427,7 +4449,6 @@ public class GoGui
 
     private void updateViews(boolean gameTreeChanged)
     {
-    	System.out.println("gogui updateViwes");
         updateViews(gameTreeChanged, false);
     }
 

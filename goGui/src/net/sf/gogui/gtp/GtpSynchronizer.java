@@ -285,7 +285,6 @@ public class GtpSynchronizer
 
     private void play(Move move) throws GtpError
     {
-    	System.out.println("GTPSyncronizer play");
         m_gtp.sendPlay(move);
         m_engineState.play(move);
     }
