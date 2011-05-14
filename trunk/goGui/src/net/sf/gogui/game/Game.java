@@ -189,7 +189,6 @@ public class Game
 
     public void play(Move move)
     {
-    	System.out.println("game play");
         m_clock.stopMove();
         Node node = new Node(move);
         GoColor color = move.getColor();

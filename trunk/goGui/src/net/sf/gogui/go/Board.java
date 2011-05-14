@@ -407,7 +407,6 @@ public final class Board
         public void execute(Board board)
         {
             GoPoint p = m_move.getPoint();
-            System.out.println("Board execute "+ p.toString(p));
             GoColor c = m_move.getColor();
             GoColor otherColor = c.otherColor();
             m_killed = new PointList();
@@ -553,7 +552,6 @@ public final class Board
         }
         if (isDead)
         {
-        	System.out.println("Board checkKill");
             killed.addAll(m_checkKillStones);
             int nuKillStones = m_checkKillStones.size();
             // Don't use an iterator for efficiency
