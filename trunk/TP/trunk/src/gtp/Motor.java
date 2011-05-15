@@ -23,7 +23,27 @@ public class Motor {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
+		
+		//Crear motor
+		//Crear jugador
+		//Crear un protocolo
+		//Levantar el tablero del archivo y setearselo al jugador.
+		//Lo mismo con la estrategia
+		//configurarEntradaSalida
+		//While...para leer la entrada y jugar...
+		Motor motor = new Motor();
+		Protocolo protocolo = new Protocolo();
+		String linea = "";
+		String respuesta = "";
+		
+		while (true) {
+			linea = motor.leerDeEntrada();
+			//Validar que sea una linea
+			
+			respuesta = protocolo.procesarComando(linea);
+			
+			
+		}
 	}
 
 	public void configurarEntradaSalida(String[] parametrosEntrada) {
