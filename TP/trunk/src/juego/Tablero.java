@@ -7,8 +7,10 @@ public class Tablero implements Cloneable {
 	private AdministradorGrupos administradorGrupos;
 	private int estado;
 	private int turno;
+	private int dimension;
 	
 	public Tablero(int dimension) {
+		this.dimension = dimension;
 		administradorGrupos = new AdministradorGrupos();
 		estado = Constantes.EN_PROGRESO;
 		turno = Constantes.NEGRO;
@@ -19,6 +21,10 @@ public class Tablero implements Cloneable {
 				tablero[i][j] = Constantes.VACIO;
 			}
 		}
+	}
+	
+	public int getDimension(){
+		return dimension;
 	}
 	
 	public Tablero agregarJugada(Posicion posicion) {
