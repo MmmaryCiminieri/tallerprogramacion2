@@ -3,12 +3,12 @@ package juego;
 public class Posicion implements Cloneable{
 	private int x;
 	private int y;
-	private int turno;
+	private int color;
 	
 	public Posicion(int x, int y, int color) {
 		this.x = x;
 		this.y = y;
-		this.turno = color;
+		this.color = color;
 	}
 	
 	public int getX() {
@@ -20,7 +20,7 @@ public class Posicion implements Cloneable{
 	}
 
 	public int getTurno() {
-		return turno;
+		return color;
 	}
 	
 	@Override
