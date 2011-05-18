@@ -23,26 +23,27 @@ public class Motor {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
-		//Crear motor
-		//Crear jugador
-		//Crear un protocolo
-		//Levantar el tablero del archivo y setearselo al jugador.
-		//Lo mismo con la estrategia
-		//configurarEntradaSalida
-		//While...para leer la entrada y jugar...
+
+		// Crear motor
+		// Crear jugador
+		// Crear un protocolo
+		// Levantar el tablero del archivo y setearselo al jugador.
+		// Lo mismo con la estrategia
+		// configurarEntradaSalida
+		// While...para leer la entrada y jugar...
 		Motor motor = new Motor();
+		motor.configurarEntradaSalida(args);
 		Protocolo protocolo = new Protocolo();
 		String linea = "";
 		String respuesta = "";
-		
+
 		while (true) {
 			linea = motor.leerDeEntrada();
-			//Validar que sea una linea
-			
+			// Validar que sea una linea
+
 			respuesta = protocolo.procesarComando(linea);
-			
-			
+			motor.escribirEnSalida(respuesta);
+
 		}
 	}
 
@@ -58,8 +59,7 @@ public class Motor {
 						.getInputStream()));
 				this.salida = new OutputStreamWriter(socket.getOutputStream());
 			} else {
-				this.entrada = new BufferedReader(new InputStreamReader(
-						System.in));
+				this.entrada = new BufferedReader(new InputStreamReader(System.in));
 				this.salida = new OutputStreamWriter(System.out);
 			}
 		} catch (UnknownHostException e) {

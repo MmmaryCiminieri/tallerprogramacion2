@@ -25,7 +25,8 @@ public class Protocolo {
 	
 
 	public Protocolo() {
-		jugador.setEstrategia(estrategia);
+		this.jugador = new Jugador();
+		this.jugador.setEstrategia(estrategia);
 	}
 
 	//es asi o es al revés?
