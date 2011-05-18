@@ -20,7 +20,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		System.out.println("Hello GO!");
 
-		Tablero tablero = new Tablero(5);
+		Tablero tablero = new Tablero(10);
 		Estrategia estrategia = new EstrategiaAlfaBeta(new EstimadorGradosLibertad(), 10, 10);
 		
 		while (true) {
