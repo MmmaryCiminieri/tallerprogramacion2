@@ -51,13 +51,13 @@ public class Protocolo {
 	}
 	
 	private int getYfromVertex (Character vertexABC){
-		return "ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(vertexABC);
+		return "ABCDEFGHJKLMNOPQRSTUVWXYZ".indexOf(vertexABC);
 	}
 	
 	private String getVertexFromPosicion(Posicion posicion){
 		String s = new String();
 		String s2 = new String();
-		s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".substring(posicion.getY(), posicion.getY()+1);
+		s = "ABCDEFGHJKLMNOPQRSTUVWXYZ".substring(posicion.getY(), posicion.getY()+1);
 		s2 = String.valueOf(jugador.getTablero().getDimension() - posicion.getX());
 		return s.concat(s2);
 		
@@ -106,13 +106,13 @@ public class Protocolo {
 			response = "= " + listarComandos();
 		} else if (token[0].equals("boardsize")) {
 			boardsize(Integer.parseInt(token[1]));
-			response = "= ";
+			response = "";
 		} else if (token[0].equals("clear_board")) {
 			clear_board();
-			response = "= ";
+			response = "";
 		} else if (token[0].equals("play")) {
 			play(token[1], token[2]);
-			response = "= ";
+			response = "";
 		} else if (token[0].equals("genmove")) {
 			response = "= " + genmove(token[1]);
 		} else if (token[0].equals("final_status_list")) { // kgs
