@@ -70,26 +70,39 @@ public class Protocolo {
 		int x = getXfromVertex(vertexNumeric);
 		int y = getYfromVertex(vertexABC);
 		if(x <= (jugador.getTablero().getDimension()-1) && x >= 0 && y <= (jugador.getTablero().getDimension()-1) && y >= 0){
-			if(color.equals("w") | color.equals("W") | color.equals("WHITE") | color.equals("white")){
+			if(isWhite(color)){
 				Posicion jugadaOponente = new Posicion(x, y, Constantes.BLANCO);
-			    jugador.getTablero().agregarJugada(jugadaOponente);
+			    jugador.agregarJugada(jugadaOponente);
 			    return null;
-			}else if(color.equals("b") | color.equals("B") | color.equals("BLACK") | color.equals("black")){
+			}else if(isBlack(color)){
 				Posicion jugadaOponente = new Posicion(x, y, Constantes.NEGRO);
-			    jugador.getTablero().agregarJugada(jugadaOponente);
+			    jugador.agregarJugada(jugadaOponente);
 			    return null;
 			}
 		}
-	return "illegal move";
+		return "illegal move";
 	}
 	
 	//jugada q realiza el jugador con estategia
 	private String genmove(String color){
-		//el color se omite, el jugador lo conoce, creo....al conocer a su oponente
-		Posicion posicion = jugador.obtenerJugada();
+		int colorJugada = 0;
+		if (isBlack(color)){
+			colorJugada = Constantes.NEGRO;
+		}else if (isWhite(color)) {
+			colorJugada = Constantes.BLANCO;
+		}
+		Posicion posicion = jugador.obtenerJugada(colorJugada);
 		return getVertexFromPosicion(posicion);
 	}
 	
+	private boolean isBlack(String color) {
+		return (color.equals("b") | color.equals("B") | color.equals("BLACK") | color.equals("black"));
+	}
+
+	private boolean isWhite(String color) {
+		return (color.equals("w") | color.equals("W") | color.equals("WHITE") | color.equals("white"));
+	}
+
 	public String procesarComando(String linea) {
 		String[] token = linea.split(" ");
 		String response = "";

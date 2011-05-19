@@ -200,5 +200,9 @@ public class Tablero implements Cloneable {
 	public AdministradorGrupos getAdministradorGrupos() {
 		return administradorGrupos;
 	}
+
+	public void setTurno(int color) {
+		this.turno = color;
+	}
 }
  
