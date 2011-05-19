@@ -10,7 +10,8 @@ public class Jugador {
 	 * Se obtiene una jugada utilizando la estrategia
 	 * @return la posicion jugada
 	 */
-	public Posicion obtenerJugada(){
+	public Posicion obtenerJugada(int color){
+		this.tablero.setTurno(color);
 		Posicion posicion = this.estrategia.obtenerMejorJugada(this.tablero);
 		this.tablero = this.tablero.agregarJugada(posicion);
 		return posicion;
@@ -19,7 +20,7 @@ public class Jugador {
 	 * Se setea una jugada del oponente
 	 * @param posicion
 	 */
-	public void setJugada(Posicion posicion){
+	public void agregarJugada(Posicion posicion){
 		this.tablero = this.tablero.agregarJugada(posicion);
 	}
 	
