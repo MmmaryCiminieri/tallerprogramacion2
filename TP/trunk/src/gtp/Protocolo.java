@@ -155,11 +155,11 @@ public class Protocolo {
 			} else if (token[1].equals("final_status_list")) { // kgs
 				response = "=" + token[0] + " " + this.listadoFinal();
 			} else {
-				response = "? " + "unknown command\n";
+				response = "? " + "unknown command";
 				//return;
 			}
 		} else {
-			response = "? " + "unknown command\n";
+			response = "? " + "unknown command";
 			// return;
 		}
 
