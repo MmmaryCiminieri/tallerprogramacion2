@@ -89,7 +89,7 @@ public class Motor {
 
 	public void escribirEnSalida(String respuesta) {
 		try {
-			this.salida.write(respuesta + "\n\n");
+			this.salida.write(respuesta);
 			this.salida.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
