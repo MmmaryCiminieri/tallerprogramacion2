@@ -21,7 +21,7 @@ public class Protocolo {
 	
 	private Jugador jugador;
 	//harcodeado por ahora
-	Estrategia estrategia = new EstrategiaAlfaBeta(new EstimadorGradosLibertad(), 10, 10);
+	Estrategia estrategia = new EstrategiaAlfaBeta(new EstimadorGradosLibertad(), 5, 5);
 	
 
 	public Protocolo() {
@@ -119,13 +119,13 @@ public class Protocolo {
 			response = "= " + listarComandos();
 		} else if (token[0].equals("boardsize")) {
 			boardsize(Integer.parseInt(token[1]));
-			response = "";
+			response = "= ";
 		} else if (token[0].equals("clear_board")) {
 			clear_board();
-			response = "";
+			response = "= ";
 		} else if (token[0].equals("play")) {
 			play(token[1], token[2]);
-			response = "";
+			response = "= ";
 		} else if (token[0].equals("genmove")) {
 			response = "= " + genmove(token[1]);
 		} else if (token[0].equals("final_status_list")) { // kgs
