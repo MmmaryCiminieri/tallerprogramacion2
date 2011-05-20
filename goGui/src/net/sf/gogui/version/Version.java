@@ -14,7 +14,7 @@ public final class Version
     */
     public static String get()
     {
-        return "@VERSION@";
+        return "1.3.0";
     }
 
     /** Make constructor unavailable; class is for namespace only. */
