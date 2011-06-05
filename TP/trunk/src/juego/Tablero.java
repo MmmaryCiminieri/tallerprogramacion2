@@ -29,16 +29,30 @@ public class Tablero implements Cloneable {
 	
 	public Tablero agregarJugada(Posicion posicion) {
 		if (esLegal(posicion)) {
-			Tablero nuevoTablero = (Tablero)this.clone();
-			nuevoTablero.tablero[posicion.getX()][posicion.getY()] = posicion.getTurno();
-			nuevoTablero.administradorGrupos.agregarFicha(posicion, nuevoTablero.buscarLibertades(posicion));
-			nuevoTablero.turno = Constantes.oponente(this.turno);
-			if (capturaEnemigo(posicion)) {
-				nuevoTablero.estado = Constantes.setGanador(posicion.getTurno());
+			Tablero nuevoTablero;
+			if (!esPasar(posicion))	{
+				nuevoTablero = (Tablero)this.clone();
+				nuevoTablero.tablero[posicion.getX()][posicion.getY()] = posicion.getTurno();
+				nuevoTablero.administradorGrupos.agregarFicha(posicion, nuevoTablero.buscarLibertades(posicion));
+				nuevoTablero.turno = Constantes.oponente(this.turno);
+				if (capturaEnemigo(posicion)) {
+					nuevoTablero.estado = Constantes.setGanador(posicion.getTurno());
+				}
+			}else {
+				nuevoTablero = this;
+				nuevoTablero.turno = Constantes.oponente(this.turno);
 			}
+			
 			return nuevoTablero;
 		}
 		return null;
+	}
+
+	private boolean esPasar(Posicion posicion) {
+		if ((posicion.getX() == -1) && (posicion.getY() == -1)) {
+			return true;
+		}
+		return false;
 	}
 
 	public int getTurno() {
@@ -63,10 +77,13 @@ public class Tablero implements Cloneable {
 	}
 	
 	private boolean esLegal(Posicion posicion) {
-		if (!perteneceTablero(posicion.getX(), posicion.getY())) {
+		if (turnoInvalido(posicion.getTurno())) {
 			return false;
 		}
-		if (turnoInvalido(posicion.getTurno())) {
+		if (esPasar(posicion)) {
+			return true;
+		}
+		if (!perteneceTablero(posicion.getX(), posicion.getY())) {
 			return false;
 		}
 		if (espacioOcupado(posicion)) {

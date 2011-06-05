@@ -21,7 +21,7 @@ public class Main {
 		System.out.println("Hello GO!");
 
 		Tablero tablero = new Tablero(10);
-		Estrategia estrategia = new EstrategiaAlfaBeta(new EstimadorGradosLibertad(), 10, 10);
+		Estrategia estrategia = new EstrategiaAlfaBeta(new EstimadorGradosLibertad(), 6, 6);
 		
 		while (true) {
 			Posicion jugada = estrategia.obtenerMejorJugada(tablero);
