@@ -3049,9 +3049,10 @@ public class GoGui
         
         if(endedBecauseOfFirstDeath){
         	showGameFinishedNew();
-    		newGame(getBoardSize());
-            updateViews(true, true);
-            checkComputerMove();
+        	return;
+    		//newGame(getBoardSize());
+            //updateViews(true, true);
+            //checkComputerMove();
         }
     }
 
@@ -4177,6 +4178,7 @@ public class GoGui
             if (m_gtp.wasKilled())
                 mainMessage = format(i18n("MSG_PROGRAM_TERMINATED"), name);
             else
+            	
                 mainMessage = i18n("MSG_PROGRAM_TERMINATED_UNEXPECTEDLY");
             boolean hasErrorOutput = m_shell.isLastTextNonGTP();
             boolean anyResponses = m_gtp.getAnyCommandsResponded();
@@ -4209,8 +4211,8 @@ public class GoGui
                     format(i18n("MSG_COMMAND_FAILED_3"), e.getCommand(),
                            e.getMessage());
         }
-        showError(mainMessage, optionalMessage, isCritical);
-        updateViews(false); // If program died, menu items need to be updated
+        //showError(mainMessage, optionalMessage, isCritical);
+        //updateViews(false); // If program died, menu items need to be updated
     }
 
     private void showError(String mainMessage, String optionalMessage)
@@ -4237,8 +4239,8 @@ public class GoGui
 //TODO agregado por mmmary falta corregir para pc player
     private void showGameFinishedNew()
     {
-       // if (m_resigned)
-         //   return;
+        if (m_resigned)
+            return;
         String disableKey = "net.sf.gogui.gogui.GoGui.game-finished";
         m_messageDialogs.showInfo(disableKey, this,
                                   i18n("MSG_GAME_FINISHED_MMMARY"),
