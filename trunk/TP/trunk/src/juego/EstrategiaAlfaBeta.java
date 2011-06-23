@@ -70,21 +70,8 @@ public class EstrategiaAlfaBeta implements Estrategia {
 			Tablero tableroSiguiente = tablero.agregarJugada(jugadaCandidata);
 			
 			if (tableroSiguiente != null) {
-				
-				/*for (int l = 0 ; l < profundidadMaxima ; l++) {
-					System.out.print("\t");
-				}
-				System.out.print("Considerada: " + jugadaCandidata.getX() + ";" + jugadaCandidata.getY());
-				if (profundidadMaxima > 1) {
-					System.out.println("");
-				}*/
-				
 	            int estimacionCandidata = -(expandirAlfaBeta(tableroSiguiente, profundidadMaxima - 1, 
 	            		-beta, -alfa).estimacion);
-	            
-	            /*if (profundidadMaxima == 1) {
-	            	System.out.println("  Valor: " + estimacionCandidata);
-	            }*/
 	            
 	            if (mejorAlMomento.estimacion < estimacionCandidata) {
 	            	mejorAlMomento.estimacion = estimacionCandidata;
@@ -97,7 +84,6 @@ public class EstrategiaAlfaBeta implements Estrategia {
 	            
 	            if (alfa >= beta) {
 	            	mejorAlMomento.estimacion = alfa;
-	            	//System.out.println("poda!");
 	            	return mejorAlMomento;
 	            } 
 			}

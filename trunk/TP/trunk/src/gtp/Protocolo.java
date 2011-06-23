@@ -1,7 +1,5 @@
 package gtp;
 
-import javax.swing.text.Position;
-
 import juego.Constantes;
 import juego.EstimadorGradosLibertad;
 import juego.Estrategia;
@@ -20,17 +18,13 @@ public class Protocolo {
 			"ref-score", "version" };
 	
 	private Jugador jugador;
-	//harcodeado por ahora
 	Estrategia estrategia = new EstrategiaAlfaBeta(new EstimadorGradosLibertad(), 5, 5);
-	
 
 	public Protocolo() {
 		this.jugador = new Jugador();
 		this.jugador.setEstrategia(estrategia);
 	}
 
-	//es asi o es al revés?
-	//se debe llamar siempre!!!!
 	private String boardsize(int size){
 		if(size <= 19 | size>= 5){
 			jugador.setTablero(new Tablero(size));
@@ -44,7 +38,6 @@ public class Protocolo {
 		jugador.setTablero(new Tablero(size));
 		return null;
 	}
-	
 	
 	private int getXfromVertex (int vertexNumeric){
 		return jugador.getTablero().getDimension() - vertexNumeric;
@@ -60,10 +53,8 @@ public class Protocolo {
 		s = "ABCDEFGHJKLMNOPQRSTUVWXYZ".substring(posicion.getY(), posicion.getY()+1);
 		s2 = String.valueOf(jugador.getTablero().getDimension() - posicion.getX());
 		return s.concat(s2);
-		
 	}
 		
-	//entiendo q es una jugada del otro q me viene
 	private String play(String color, String vertex){
 		Character vertexABC = vertex.charAt(0);
 		int vertexNumeric = Integer.parseInt(vertex.substring(1));
@@ -83,7 +74,6 @@ public class Protocolo {
 		return "illegal move";
 	}
 	
-	//jugada q realiza el jugador con estategia
 	private String genmove(String color){
 		int colorJugada = 0;
 		if (isBlack(color)){
@@ -156,11 +146,9 @@ public class Protocolo {
 				response = "=" + token[0] + " " + this.listadoFinal();
 			} else {
 				response = "? " + "unknown command";
-				//return;
 			}
 		} else {
 			response = "? " + "unknown command";
-			// return;
 		}
 
 		response = response + "\n\n";
