@@ -7,11 +7,6 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-/**
- * 
- * @author pablo Tiene la responsabilidad de determinar el modo de conexion del
- *         GTP Engine.
- */
 public class Motor {
 	private BufferedReader entrada = null;
 	private OutputStreamWriter salida = null;
@@ -19,18 +14,7 @@ public class Motor {
 	private final int CARACTER_RETORNO_CARRO = 13;
 	private final int CARACTER_TAB = 9;
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-
-		// Crear motor
-		// Crear jugador
-		// Crear un protocolo
-		// Levantar el tablero del archivo y setearselo al jugador.
-		// Lo mismo con la estrategia
-		// configurarEntradaSalida
-		// While...para leer la entrada y jugar...
 		Motor motor = new Motor();
 		motor.configurarEntradaSalida(args);
 		Protocolo protocolo = new Protocolo();
@@ -39,8 +23,6 @@ public class Motor {
 
 		while (true) {
 			linea = motor.leerDeEntrada();
-			// Validar que sea una linea
-
 			respuesta = protocolo.procesarComando(linea);
 			motor.escribirEnSalida(respuesta);
 

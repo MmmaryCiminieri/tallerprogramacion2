@@ -1,6 +1,7 @@
 package proxy;
 import java.net.*;
 import java.io.*;
+
 /**
  * 
  * @author pablo
@@ -20,7 +21,6 @@ class Conmutador {
      * @throws IOException
      */
     void conmutar() throws IOException {
-    	//TODO: Cuando corta esto?
         while (true) {
 
 			this.entrada = new BufferedReader(new InputStreamReader(System.in));
